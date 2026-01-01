@@ -199,106 +199,135 @@ function App() {
         </div>
       </header>
 
-      {!userId ? (
-        <main className="card">
-          <h2>Sign in</h2>
-          <p>Use Google sign-in to create and view your bets.</p>
-        </main>
-      ) : (
-        <main className="grid">
-          <section className="card">
-            <h2>New bet</h2>
-            <form onSubmit={handleCreateBet} className="form">
-              <label>
-                Sport
-                <input value={sport} onChange={(e) => setSport(e.target.value)} placeholder="NBA" />
-              </label>
-              <label>
-                League (optional)
-                <input value={league} onChange={(e) => setLeague(e.target.value)} placeholder="NBA" />
-              </label>
-              <label>
-                Event
-                <input value={event} onChange={(e) => setEvent(e.target.value)} placeholder="Lakers vs Celtics" />
-              </label>
-              <label>
-                Pick
-                <input value={pick} onChange={(e) => setPick(e.target.value)} placeholder="Lakers ML" />
-              </label>
-              <label>
-                Odds (decimal)
-                <input value={oddsDecimal} onChange={(e) => setOddsDecimal(e.target.value)} placeholder="1.91" />
-              </label>
-              <label>
-                Stake
-                <input value={stake} onChange={(e) => setStake(e.target.value)} placeholder="100" />
-              </label>
-              <button type="submit" disabled={saving}>
-                {saving ? 'Saving…' : 'Post bet'}
-              </button>
-            </form>
-            {error ? <p className="error">{error}</p> : null}
-          </section>
+      <main className="grid">
+        <section className="card">
+          <h2>New bet</h2>
+          {!userId ? (
+            <p>Sign in (top-right) to post bets and track your record.</p>
+          ) : null}
+          <form onSubmit={handleCreateBet} className="form">
+            <label>
+              Sport
+              <input
+                value={sport}
+                onChange={(e) => setSport(e.target.value)}
+                placeholder="NBA"
+                disabled={!userId}
+              />
+            </label>
+            <label>
+              League (optional)
+              <input
+                value={league}
+                onChange={(e) => setLeague(e.target.value)}
+                placeholder="NBA"
+                disabled={!userId}
+              />
+            </label>
+            <label>
+              Event
+              <input
+                value={event}
+                onChange={(e) => setEvent(e.target.value)}
+                placeholder="Lakers vs Celtics"
+                disabled={!userId}
+              />
+            </label>
+            <label>
+              Pick
+              <input
+                value={pick}
+                onChange={(e) => setPick(e.target.value)}
+                placeholder="Lakers ML"
+                disabled={!userId}
+              />
+            </label>
+            <label>
+              Odds (decimal)
+              <input
+                value={oddsDecimal}
+                onChange={(e) => setOddsDecimal(e.target.value)}
+                placeholder="1.91"
+                disabled={!userId}
+              />
+            </label>
+            <label>
+              Stake
+              <input
+                value={stake}
+                onChange={(e) => setStake(e.target.value)}
+                placeholder="100"
+                disabled={!userId}
+              />
+            </label>
+            <button type="submit" disabled={!userId || saving}>
+              {saving ? 'Saving…' : 'Post bet'}
+            </button>
+          </form>
+          {error ? <p className="error">{error}</p> : null}
+        </section>
 
-          <section className="card">
-            <h2>Analytics</h2>
-            <div className="stats">
-              <div>
-                <div className="k">Settled</div>
-                <div className="v">{stats.settledCount}</div>
-              </div>
-              <div>
-                <div className="k">W-L-P</div>
-                <div className="v">
-                  {stats.wins}-{stats.losses}-{stats.pushes}
-                </div>
-              </div>
-              <div>
-                <div className="k">Win %</div>
-                <div className="v">{stats.winRate}%</div>
-              </div>
-              <div>
-                <div className="k">Net</div>
-                <div className="v">{stats.net}</div>
-              </div>
-              <div>
-                <div className="k">ROI</div>
-                <div className="v">{stats.roi}%</div>
+        <section className="card">
+          <h2>Analytics</h2>
+          {!userId ? <p>Sign in to see your analytics.</p> : null}
+          <div className="stats">
+            <div>
+              <div className="k">Settled</div>
+              <div className="v">{stats.settledCount}</div>
+            </div>
+            <div>
+              <div className="k">W-L-P</div>
+              <div className="v">
+                {stats.wins}-{stats.losses}-{stats.pushes}
               </div>
             </div>
-          </section>
+            <div>
+              <div className="k">Win %</div>
+              <div className="v">{stats.winRate}%</div>
+            </div>
+            <div>
+              <div className="k">Net</div>
+              <div className="v">{stats.net}</div>
+            </div>
+            <div>
+              <div className="k">ROI</div>
+              <div className="v">{stats.roi}%</div>
+            </div>
+          </div>
+        </section>
 
-          <section className="card full">
-            <h2>Your bets</h2>
-            {bets.length === 0 ? (
-              <p>No bets yet.</p>
-            ) : (
-              <div className="list">
-                {bets.map((b) => (
-                  <div key={b.id} className="row">
-                    <div className="rowMain">
-                      <div className="rowTitle">
-                        <strong>{b.sport}</strong> — {b.event}
-                      </div>
-                      <div className="rowSub">
-                        {b.pick} · odds {b.oddsDecimal} · stake {b.stake} ·{' '}
-                        <span className={`pill ${b.status}`}>{b.status}</span>
-                      </div>
+        <section className="card full">
+          <h2>Your bets</h2>
+          {!userId ? (
+            <p>Sign in to create and view your bets.</p>
+          ) : bets.length === 0 ? (
+            <p>No bets yet.</p>
+          ) : (
+            <div className="list">
+              {bets.map((b) => (
+                <div key={b.id} className="row">
+                  <div className="rowMain">
+                    <div className="rowTitle">
+                      <strong>{b.sport}</strong> — {b.event}
                     </div>
-                    <div className="rowActions">
-                      <button onClick={() => handleSettle(b.id, 'win')}>Win</button>
-                      <button onClick={() => handleSettle(b.id, 'loss')}>Loss</button>
-                      <button onClick={() => handleSettle(b.id, 'push')}>Push</button>
-                      <button onClick={() => handleSettle(b.id, 'pending')}>Pending</button>
-                      <button onClick={() => handleDelete(b.id)}>Delete</button>
+                    <div className="rowSub">
+                      {b.pick} · odds {b.oddsDecimal} · stake {b.stake} ·{' '}
+                      <span className={`pill ${b.status}`}>{b.status}</span>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-          </section>
-        </main>
-      )}
+                  <div className="rowActions">
+                    <button onClick={() => handleSettle(b.id, 'win')}>Win</button>
+                    <button onClick={() => handleSettle(b.id, 'loss')}>Loss</button>
+                    <button onClick={() => handleSettle(b.id, 'push')}>Push</button>
+                    <button onClick={() => handleSettle(b.id, 'pending')}>Pending</button>
+                    <button onClick={() => handleDelete(b.id)}>Delete</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
     </div>
   )
 }
