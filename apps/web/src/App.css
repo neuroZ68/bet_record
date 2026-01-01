@@ -131,8 +131,158 @@
   border-color: rgba(0, 0, 0, 0.25);
 }
 
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+
+.tab:hover {
+  opacity: 0.8;
+}
+
+.tab.active {
+  opacity: 1;
+  border-bottom-color: #646cff;
+}
+
+.rankings-container {
+  max-width: 100%;
+}
+
+.rankings-table {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rankings-header,
+.ranking-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px 80px 80px 90px 120px;
+  gap: 12px;
+  padding: 12px;
+  align-items: center;
+}
+
+.rankings-header {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0.7;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.ranking-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s;
+}
+
+.ranking-row:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.rank-col {
+  text-align: center;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.rank-badge.top1 {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+}
+
+.rank-badge.top2 {
+  background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+  color: #000;
+}
+
+.rank-badge.top3 {
+  background: linear-gradient(135deg, #cd7f32, #e8a87c);
+  color: #fff;
+}
+
+.user-col {
+  font-size: 15px;
+}
+
+.stat-col {
+  text-align: center;
+  font-size: 14px;
+}
+
+.stat-col .positive {
+  color: #008000;
+  font-weight: 600;
+}
+
+.stat-col .negative {
+  color: #b00020;
+  font-weight: 600;
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+  
+  .rankings-header,
+  .ranking-row {
+    grid-template-columns: 40px 1fr 60px 60px 60px 70px 90px;
+    gap: 8px;
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+  
+  .rank-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .user-col {
+    font-size: 14px;
+  }
+  
+  .stat-col {
+    font-size: 12px;
+  }
+  
+  .rankings-header {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .rankings-header,
+  .ranking-row {
+    grid-template-columns: 35px 1fr 50px 50px 55px 60px 80px;
+    gap: 6px;
+    padding: 8px 4px;
   }
 }
