@@ -1,0 +1,20 @@
+{
+  "name": "bet-record",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "functions"
+  ],
+  "scripts": {
+    "dev:web": "npm --prefix apps/web run dev",
+    "build:web": "npm --prefix apps/web run build",
+    "lint:web": "npm --prefix apps/web run lint",
+    "dev:emulators": "firebase emulators:start",
+    "deploy": "firebase deploy",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "firebase-tools": "^13.35.1",
+    "prettier": "^3.2.5"
+  }
+}

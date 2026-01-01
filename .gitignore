@@ -1,0 +1,26 @@
+.DS_Store
+
+# Node
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+apps/web/dist
+apps/web/.vite
+functions/lib
+
+# Firebase
+.firebase
+.firebaserc
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor
+.vscode
+.idea
