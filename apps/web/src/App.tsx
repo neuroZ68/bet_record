@@ -13,8 +13,12 @@ import {
   where,
 } from 'firebase/firestore'
 
-import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
-import { auth, db, googleProvider } from './lib/firebase'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth, db } from './lib/firebase'
+import { getUserProfile } from './lib/userService'
+import { Auth } from './components/Auth'
+import { UsernameSetup } from './components/UsernameSetup'
+import type { UserDoc } from './types/user'
 
 type BetStatus = 'pending' | 'win' | 'loss' | 'push'
 
@@ -148,6 +152,10 @@ const SIMULATED_RANKINGS: RankedUser[] = [
 
 function App() {
   const [userId, setUserId] = useState<string | null>(null)
+  const [userProfile, setUserProfile] = useState<UserDoc | null>(null)
+  const [needsUsername, setNeedsUsername] = useState(false)
+  const [authLoading, setAuthLoading] = useState(true)
+  const [showAuthModal, setShowAuthModal] = useState(false)
   const [bets, setBets] = useState<BetDoc[]>([])
   const [activeTab, setActiveTab] = useState<'bets' | 'rankings'>('bets')
   const [sport, setSport] = useState('')
@@ -160,8 +168,30 @@ function App() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setUserId(user?.uid ?? null)
+    const unsub = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        setUserId(null)
+        setUserProfile(null)
+        setNeedsUsername(false)
+        setAuthLoading(false)
+        return
+      }
+
+      setUserId(user.uid)
+      
+      // Check if user has a profile
+      const profile = await getUserProfile(user.uid)
+      
+      if (!profile) {
+        // User authenticated but no profile - needs username
+        setNeedsUsername(true)
+        setUserProfile(null)
+      } else {
+        setUserProfile(profile)
+        setNeedsUsername(false)
+      }
+      
+      setAuthLoading(false)
     })
     return () => unsub()
   }, [])
@@ -209,9 +239,18 @@ function App() {
     }
   }, [bets])
 
-  async function handleGoogleLogin() {
-    setError(null)
-    await signInWithPopup(auth, googleProvider)
+  async function handleUsernameComplete() {
+    // Reload user profile
+    if (userId) {
+      const profile = await getUserProfile(userId)
+      setUserProfile(profile)
+      setNeedsUsername(false)
+    }
+  }
+
+  async function handleAuthComplete() {
+    // Close modal and auth state will be handled by onAuthStateChanged
+    setShowAuthModal(false)
   }
 
   async function handleLogout() {
@@ -288,18 +327,40 @@ function App() {
     }
   }
 
+  // Show loading state while checking auth
+  if (authLoading) {
+    return <div className="loading">Loading...</div>
+  }
+
+  // Show username setup for users who just signed in with Google
+  if (needsUsername) {
+    return <UsernameSetup onComplete={handleUsernameComplete} />
+  }
+
   return (
     <div className="container">
       <header className="header">
-        <div>
-          <h1>Bet Record</h1>
-          <p className="sub">Prototype: track picks and outcomes.</p>
+        <div className="logo-section">
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 20L35 40L45 45L40 60L55 50L45 45L50 20Z" stroke="#10b981" strokeWidth="3" fill="none"/>
+            <path d="M30 50C30 50 35 45 40 50C45 55 50 60 50 60" stroke="#10b981" strokeWidth="3" fill="none"/>
+            <path d="M70 50C70 50 65 45 60 50C55 55 50 60 50 60" stroke="#10b981" strokeWidth="3" fill="none"/>
+            <path d="M45 70L50 75L55 70L50 85L45 70Z" fill="#10b981"/>
+            <rect x="42" y="75" width="4" height="5" fill="#10b981"/>
+            <rect x="46" y="75" width="4" height="5" fill="#10b981"/>
+            <rect x="50" y="75" width="4" height="5" fill="#10b981"/>
+            <rect x="54" y="75" width="4" height="5" fill="#10b981"/>
+          </svg>
+          <div className="brand-text">
+            <h1>BetTrack <span className="pro">Pro</span></h1>
+            <p className="sub">{userProfile ? `Welcome, ${userProfile.username}!` : 'Track your bets like a pro'}</p>
+          </div>
         </div>
         <div className="auth">
-          {userId ? (
+          {userId && userProfile ? (
             <button onClick={handleLogout}>Log out</button>
           ) : (
-            <button onClick={handleGoogleLogin}>Sign in with Google</button>
+            <button onClick={() => setShowAuthModal(true)}>Sign In</button>
           )}
         </div>
       </header>
@@ -318,6 +379,14 @@ function App() {
           Rankings
         </button>
       </nav>
+
+      {showAuthModal && !userId && (
+        <div className="auth-overlay" onClick={(e) => {
+          if (e.target === e.currentTarget) setShowAuthModal(false)
+        }}>
+          <Auth onAuthComplete={handleAuthComplete} />
+        </div>
+      )}
 
       {activeTab === 'bets' ? (
         <main className="grid">

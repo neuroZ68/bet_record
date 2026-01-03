@@ -32,7 +32,7 @@ export const auth = getAuth(app)
 export const googleProvider = new GoogleAuthProvider()
 export const db = getFirestore(app)
 
-const useEmulators = isDev && getEnv('VITE_USE_EMULATORS') !== 'false'
+const useEmulators = isDev && getEnv('VITE_USE_EMULATORS') === 'true'
 if (useEmulators) {
   connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
   connectFirestoreEmulator(db, '127.0.0.1', 8080)

@@ -6,6 +6,15 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // Users collection - users can read/write their own profile
+    match /users/{userId} {
+      allow read: if true; // Allow reading for username checks
+      allow create: if request.auth.uid == userId; // Allow creation during signup
+      allow update: if signedIn() && request.auth.uid == userId;
+      allow delete: if false; // Prevent deletion
+    }
+
+    // Bets collection - users can only access their own bets
     match /bets/{betId} {
       allow read: if signedIn() && resource.data.userId == request.auth.uid;
 
