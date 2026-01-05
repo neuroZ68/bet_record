@@ -1,0 +1,494 @@
+/* My Bets Page Styles */
+
+.my-bets-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: #9db9b0;
+    font-size: 1rem;
+    max-width: 600px;
+}
+
+/* Upload Zone */
+.upload-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3rem 1.5rem;
+    border: 2px dashed #3b544b;
+    border-radius: 12px;
+    background: rgba(28, 46, 40, 0.3);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.upload-zone:hover {
+    background: rgba(28, 46, 40, 0.5);
+    border-color: rgba(16, 183, 127, 0.5);
+}
+
+.upload-zone.dragging {
+    border-color: #10b981;
+    background: rgba(16, 183, 127, 0.1);
+}
+
+.upload-icon-wrapper {
+    padding: 1rem;
+    background: #283933;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.upload-zone:hover .upload-icon-wrapper {
+    background: rgba(16, 183, 127, 0.2);
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    color: #10b981;
+}
+
+.upload-text {
+    text-align: center;
+}
+
+.upload-text h3 {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.upload-text p {
+    color: #9db9b0;
+    font-size: 0.875rem;
+}
+
+.upload-btn {
+    padding: 0.5rem 1.5rem;
+    background: #283933;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.upload-btn:hover {
+    background: #10b981;
+    color: #10221c;
+}
+
+/* Preview Image */
+.preview-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.preview-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid #283933;
+}
+
+.remove-preview {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-preview:hover {
+    background: #ef4444;
+}
+
+/* OCR Progress */
+.ocr-progress {
+    padding: 1.25rem;
+    background: #1c2e28;
+    border: 1px solid #283933;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.ocr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.ocr-status {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ocr-icon {
+    color: #10b981;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.ocr-text {
+    color: white;
+    font-weight: 500;
+}
+
+.ocr-percent {
+    color: #10b981;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #283933;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #10b981;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.ocr-success {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #10b981;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Form Section */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #283933;
+    margin-bottom: 1.5rem;
+}
+
+.form-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.ai-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: #283933;
+    border-radius: 9999px;
+    color: #9db9b0;
+    font-size: 0.75rem;
+}
+
+.ai-badge .ai-icon {
+    color: #10b981;
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    color: #9db9b0;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.form-input-wrapper {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: #1c2e28;
+    border: 1px solid #3b544b;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 1px #10b981;
+}
+
+.form-input.ai-filled {
+    border-color: rgba(16, 183, 127, 0.5);
+    box-shadow: 0 0 10px rgba(16, 183, 127, 0.2);
+}
+
+.form-input::placeholder {
+    color: #6b7280;
+}
+
+.ai-indicator {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #10b981;
+}
+
+.currency-prefix {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: 500;
+}
+
+.form-input.with-prefix {
+    padding-left: 2rem;
+}
+
+/* Form Select */
+.form-select {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    background: #1c2e28;
+    border: 1px solid #3b544b;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 1px #10b981;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9db9b0;
+    pointer-events: none;
+}
+
+/* Action Bar */
+.action-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #283933;
+    margin-top: 1rem;
+}
+
+.cancel-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #283933;
+}
+
+.submit-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    background: #10b981;
+    border: none;
+    color: #10221c;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(16, 183, 127, 0.3);
+    transition: all 0.2s;
+}
+
+.submit-btn:hover {
+    background: #0e9f6e;
+    box-shadow: 0 0 25px rgba(16, 183, 127, 0.5);
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Stats Section */
+.stats-section {
+    margin-bottom: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .stats-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.stat-box {
+    padding: 1rem;
+    background: #1c2e28;
+    border: 1px solid #283933;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-box .label {
+    color: #9db9b0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.stat-box .value {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.stat-box .value.positive {
+    color: #10b981;
+}
+
+.stat-box .value.negative {
+    color: #ef4444;
+}
+
+/* Bet History in My Bets */
+.my-bets-history {
+    margin-top: 2rem;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.history-header h3 {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    padding: 0.375rem 0.75rem;
+    background: #283933;
+    border: 1px solid #3b544b;
+    color: #9db9b0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #10b981;
+    border-color: #10b981;
+    color: #10221c;
+}

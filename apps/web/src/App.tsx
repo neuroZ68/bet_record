@@ -19,6 +19,8 @@ import { getUserProfile } from './lib/userService'
 import { Auth } from './components/Auth'
 import { UsernameSetup } from './components/UsernameSetup'
 import { Feed } from './components/Feed'
+import { InfluencerProfile } from './components/InfluencerProfile'
+import { MyBets } from './components/MyBets'
 import type { UserDoc } from './types/user'
 
 type BetStatus = 'pending' | 'win' | 'loss' | 'push'
@@ -158,7 +160,8 @@ function App() {
   const [authLoading, setAuthLoading] = useState(true)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [bets, setBets] = useState<BetDoc[]>([])
-  const [activeTab, setActiveTab] = useState<'feed' | 'bets' | 'rankings'>('feed')
+  const [activeTab, setActiveTab] = useState<'feed' | 'bets' | 'rankings' | 'profile'>('feed')
+  const [viewProfileId, setViewProfileId] = useState<string | null>(null)
   const [sport, setSport] = useState('')
   const [league, setLeague] = useState('')
   const [event, setEvent] = useState('')
@@ -398,140 +401,46 @@ function App() {
       {activeTab === 'feed' && (
         <main className="grid">
           <Feed />
+          <button
+            onClick={() => {
+              setViewProfileId('apex-picks')
+              setActiveTab('profile')
+            }}
+            style={{
+              marginTop: '1rem',
+              background: '#10b981',
+              border: 'none',
+              color: '#0f172a',
+              borderRadius: '8px',
+              padding: '0.75rem 1rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              width: '100%',
+              maxWidth: '400px',
+              margin: '1rem auto 0'
+            }}
+          >
+            View Demo Profile: ApexPicks_Official
+          </button>
         </main>
       )}
 
-      {activeTab === 'bets' ? (
-        <main className="grid">
-          <section className="card">
-            <h2>New bet</h2>
-            {!userId ? (
-              <p>Sign in (top-right) to post bets and track your record.</p>
-            ) : null}
-            <form onSubmit={handleCreateBet} className="form">
-              <label>
-                Sport
-                <input
-                  value={sport}
-                  onChange={(e) => setSport(e.target.value)}
-                  placeholder="NBA"
-                  disabled={!userId}
-                />
-              </label>
-              <label>
-                League (optional)
-                <input
-                  value={league}
-                  onChange={(e) => setLeague(e.target.value)}
-                  placeholder="NBA"
-                  disabled={!userId}
-                />
-              </label>
-              <label>
-                Event
-                <input
-                  value={event}
-                  onChange={(e) => setEvent(e.target.value)}
-                  placeholder="Lakers vs Celtics"
-                  disabled={!userId}
-                />
-              </label>
-              <label>
-                Pick
-                <input
-                  value={pick}
-                  onChange={(e) => setPick(e.target.value)}
-                  placeholder="Lakers ML"
-                  disabled={!userId}
-                />
-              </label>
-              <label>
-                Odds (decimal)
-                <input
-                  value={oddsDecimal}
-                  onChange={(e) => setOddsDecimal(e.target.value)}
-                  placeholder="1.91"
-                  disabled={!userId}
-                />
-              </label>
-              <label>
-                Stake
-                <input
-                  value={stake}
-                  onChange={(e) => setStake(e.target.value)}
-                  placeholder="100"
-                  disabled={!userId}
-                />
-              </label>
-              <button type="submit" disabled={!userId || saving}>
-                {saving ? 'Saving…' : 'Post bet'}
-              </button>
-            </form>
-            {error ? <p className="error">{error}</p> : null}
-          </section>
-
-          <section className="card">
-            <h2>Analytics</h2>
-            {!userId ? <p>Sign in to see your analytics.</p> : null}
-            <div className="stats">
-              <div>
-                <div className="k">Settled</div>
-                <div className="v">{stats.settledCount}</div>
-              </div>
-              <div>
-                <div className="k">W-L-P</div>
-                <div className="v">
-                  {stats.wins}-{stats.losses}-{stats.pushes}
-                </div>
-              </div>
-              <div>
-                <div className="k">Win %</div>
-                <div className="v">{stats.winRate}%</div>
-              </div>
-              <div>
-                <div className="k">Net</div>
-                <div className="v">{stats.net}</div>
-              </div>
-              <div>
-                <div className="k">ROI</div>
-                <div className="v">{stats.roi}%</div>
-              </div>
-            </div>
-          </section>
-
-          <section className="card full">
-            <h2>Your bets</h2>
-            {!userId ? (
-              <p>Sign in to create and view your bets.</p>
-            ) : bets.length === 0 ? (
-              <p>No bets yet.</p>
-            ) : (
-              <div className="list">
-                {bets.map((b) => (
-                  <div key={b.id} className="row">
-                    <div className="rowMain">
-                      <div className="rowTitle">
-                        <strong>{b.sport}</strong> — {b.event}
-                      </div>
-                      <div className="rowSub">
-                        {b.pick} · odds {b.oddsDecimal} · stake {b.stake} ·{' '}
-                        <span className={`pill ${b.status}`}>{b.status}</span>
-                      </div>
-                    </div>
-                    <div className="rowActions">
-                      <button onClick={() => handleSettle(b.id, 'win')}>Win</button>
-                      <button onClick={() => handleSettle(b.id, 'loss')}>Loss</button>
-                      <button onClick={() => handleSettle(b.id, 'push')}>Push</button>
-                      <button onClick={() => handleSettle(b.id, 'pending')}>Pending</button>
-                      <button onClick={() => handleDelete(b.id)}>Delete</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
+      {activeTab === 'profile' && viewProfileId && (
+        <main className="grid" style={{ display: 'block' }}>
+          <InfluencerProfile
+            profileId={viewProfileId}
+            onBack={() => setActiveTab('feed')}
+          />
         </main>
-      ) : (
+      )}
+
+      {activeTab === 'bets' && (
+        <main className="grid" style={{ display: 'block' }}>
+          <MyBets userId={userId} onSignIn={() => setShowAuthModal(true)} />
+        </main>
+      )}
+
+      {activeTab === 'rankings' && (
         <main className="rankings-container">
           <section className="card">
             <h2>Community Rankings</h2>

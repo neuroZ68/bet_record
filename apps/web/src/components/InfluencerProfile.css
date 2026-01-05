@@ -1,0 +1,660 @@
+/* Influencer Profile Styles */
+
+.profile-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Back Button */
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: #9db9b0;
+    font-size: 0.875rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    color: white;
+    background: rgba(40, 57, 51, 0.5);
+}
+
+/* Profile Header Card */
+.profile-card {
+    background: #162e26;
+    border: 1px solid #283933;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.profile-cover {
+    height: 120px;
+    background: linear-gradient(135deg, #1c2e27, rgba(16, 183, 127, 0.2));
+    position: relative;
+}
+
+.profile-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="%23283933"/><rect width="2" height="2" fill="%231c2e27"/></svg>');
+    opacity: 0.3;
+}
+
+.profile-content {
+    padding: 0 1.5rem 1.5rem;
+    margin-top: -3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .profile-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+/* Profile Identity */
+.profile-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .profile-identity {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+.avatar-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.profile-avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border: 4px solid #10221c;
+    background-size: cover;
+    background-position: center;
+    background-color: #283933;
+}
+
+.verified-badge-large {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: #10b981;
+    border-radius: 50%;
+    border: 3px solid #10221c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10221c;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .profile-name {
+        justify-content: flex-start;
+    }
+}
+
+.pro-badge {
+    padding: 0.125rem 0.5rem;
+    background: rgba(16, 183, 127, 0.2);
+    color: #10b981;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    border: 1px solid rgba(16, 183, 127, 0.2);
+}
+
+.profile-bio {
+    color: #9db9b0;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.profile-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .profile-tags {
+        justify-content: flex-start;
+    }
+}
+
+.tag {
+    padding: 0.25rem 0.5rem;
+    background: #283933;
+    color: white;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #3b544b;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.follow-btn {
+    flex: 1;
+    padding: 0.625rem 1.5rem;
+    background: #10b981;
+    color: #10221c;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 0 15px rgba(16, 183, 127, 0.3);
+}
+
+.follow-btn:hover {
+    background: #059669;
+    box-shadow: 0 0 20px rgba(16, 183, 127, 0.5);
+}
+
+.subscribe-btn {
+    flex: 1;
+    padding: 0.625rem 1.5rem;
+    background: transparent;
+    color: white;
+    border: 1px solid #3b544b;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.subscribe-btn:hover {
+    background: #283933;
+}
+
+/* Stats Section */
+.profile-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .profile-stats {
+        flex-direction: row;
+        padding-top: 3rem;
+    }
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: rgba(28, 46, 39, 0.5);
+    border: 1px solid #283933;
+    border-radius: 12px;
+    transition: border-color 0.2s;
+}
+
+.stat-card:hover {
+    border-color: #3b544b;
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label {
+    color: #9db9b0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-icon {
+    color: #9db9b0;
+    font-size: 1.125rem;
+}
+
+.stat-card:hover .stat-icon {
+    color: #10b981;
+}
+
+.stat-value {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #10b981;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Transparency Gauge */
+.transparency-gauge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #1c2e27, #10221c);
+    border: 1px solid #283933;
+    border-radius: 12px;
+    min-width: 200px;
+}
+
+.gauge-circle {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.gauge-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: #283933;
+    stroke-width: 3;
+}
+
+.gauge-progress {
+    fill: none;
+    stroke: #10b981;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 98, 100;
+    filter: drop-shadow(0 0 4px rgba(16, 183, 127, 0.8));
+}
+
+.gauge-value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: white;
+}
+
+.gauge-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.gauge-label {
+    color: #9db9b0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.gauge-status {
+    color: white;
+    font-weight: 600;
+}
+
+.gauge-verified {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #10b981;
+    font-size: 0.625rem;
+    margin-top: 0.25rem;
+}
+
+/* Bet History Section */
+.history-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-tabs {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid #283933;
+    padding: 0 0.5rem;
+    overflow-x: auto;
+}
+
+.history-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.25rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #9db9b0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.history-tab:hover {
+    color: white;
+}
+
+.history-tab.active {
+    color: white;
+    border-bottom-color: #10b981;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.history-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.history-title h3 {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.history-count {
+    padding: 0.125rem 0.5rem;
+    background: #283933;
+    color: #9db9b0;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+}
+
+/* Bet List */
+.bet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.bet-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: #162e26;
+    border: 1px solid #283933;
+    border-radius: 12px;
+    transition: border-color 0.2s;
+}
+
+@media (min-width: 768px) {
+    .bet-item {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.bet-item:hover {
+    border-color: rgba(16, 183, 127, 0.3);
+}
+
+.bet-item.loss:hover {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.bet-main {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+.bet-sport-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #3b544b;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+    padding: 4px;
+}
+
+.bet-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bet-event {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.bet-event h4 {
+    color: white;
+    font-weight: 700;
+}
+
+.bet-event span {
+    color: #9db9b0;
+    font-size: 0.75rem;
+}
+
+.bet-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.bet-pick {
+    padding: 0.25rem 0.5rem;
+    background: rgba(16, 183, 127, 0.1);
+    color: #10b981;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.bet-odds {
+    color: #9db9b0;
+    font-size: 0.875rem;
+}
+
+.bet-stake {
+    color: #9db9b0;
+    font-size: 0.75rem;
+    padding-left: 1rem;
+    border-left: 1px solid #3b544b;
+}
+
+.bet-stake span {
+    color: white;
+    font-weight: 500;
+}
+
+/* Bet Result Section */
+.bet-result {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #283933;
+}
+
+@media (min-width: 768px) {
+    .bet-result {
+        border-top: none;
+        padding-top: 0;
+        justify-content: flex-end;
+    }
+}
+
+.ocr-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    background: rgba(16, 183, 127, 0.1);
+    border: 1px solid rgba(16, 183, 127, 0.2);
+    border-radius: 9999px;
+}
+
+.ocr-badge span {
+    color: #10b981;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.unverified-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    background: rgba(234, 179, 8, 0.1);
+    border: 1px solid rgba(234, 179, 8, 0.2);
+    border-radius: 9999px;
+}
+
+.unverified-badge span {
+    color: #eab308;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.outcome {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 60px;
+}
+
+.outcome-status {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.outcome-status.win {
+    color: #10b981;
+}
+
+.outcome-status.loss {
+    color: #ef4444;
+}
+
+.outcome-status.pending {
+    color: white;
+}
+
+.outcome-amount {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.outcome-amount.win {
+    color: #10b981;
+}
+
+.outcome-amount.loss {
+    color: #ef4444;
+}
+
+.outcome-amount.pending {
+    color: #9db9b0;
+}
+
+/* Load More */
+.load-more-btn {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    background: none;
+    border: 1px solid #283933;
+    border-radius: 8px;
+    color: #9db9b0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.load-more-btn:hover {
+    background: #1c2e27;
+    color: white;
+}
