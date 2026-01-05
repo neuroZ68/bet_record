@@ -1,0 +1,371 @@
+/* Feed Component Styles */
+/* Separate CSS file to avoid conflicts with base App.css */
+
+.feed-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.feed-header {
+    margin-bottom: 1.5rem;
+}
+
+.feed-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.feed-tabs {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid #334155;
+    margin-bottom: 1.5rem;
+}
+
+.feed-tab {
+    background: none;
+    border: none;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #94a3b8;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.feed-tab:hover {
+    color: white;
+}
+
+.feed-tab.active {
+    color: #10b981;
+    border-bottom-color: #10b981;
+}
+
+/* Feed Cards */
+.feed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.feed-card {
+    background: #1e293b;
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.feed-card-content {
+    padding: 1.25rem;
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.user-info {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: #334155;
+}
+
+.user-details h3 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.verified-icon {
+    color: #10b981;
+    font-size: 1rem;
+}
+
+.user-meta {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+}
+
+/* Bet Content */
+.bet-content {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bet-image {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    background-color: #334155;
+    flex-shrink: 0;
+}
+
+.bet-details {
+    flex: 1;
+}
+
+.bet-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.bet-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: white;
+    font-family: monospace;
+}
+
+/* Card Footer */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.social-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.action-btn:hover {
+    color: #10b981;
+}
+
+.tail-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #10b981;
+    color: #0f172a;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tail-btn:hover {
+    background: #059669;
+}
+
+/* Achievement Card */
+.achievement-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), #0f172a);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.achievement-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.achievement-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.achievement-avatar {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid #10b981;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+}
+
+.streak-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background: #eab308;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.streak-badge-icon {
+    color: white;
+    font-size: 0.875rem;
+}
+
+.achievement-info .streak-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 9999px;
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+.achievement-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.achievement-info p {
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.achievement-info .profit {
+    color: #10b981;
+    font-weight: 700;
+}
+
+.view-streak-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.view-streak-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Loading Spinner */
+.feed-loading {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #334155;
+    border-top-color: #10b981;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .bet-content {
+        flex-direction: column;
+    }
+
+    .bet-image {
+        width: 100%;
+        height: 150px;
+    }
+
+    .achievement-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .achievement-user {
+        flex-direction: column;
+    }
+
+    .view-streak-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

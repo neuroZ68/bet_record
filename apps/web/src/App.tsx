@@ -18,6 +18,7 @@ import { auth, db } from './lib/firebase'
 import { getUserProfile } from './lib/userService'
 import { Auth } from './components/Auth'
 import { UsernameSetup } from './components/UsernameSetup'
+import { Feed } from './components/Feed'
 import type { UserDoc } from './types/user'
 
 type BetStatus = 'pending' | 'win' | 'loss' | 'push'
@@ -157,7 +158,7 @@ function App() {
   const [authLoading, setAuthLoading] = useState(true)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [bets, setBets] = useState<BetDoc[]>([])
-  const [activeTab, setActiveTab] = useState<'bets' | 'rankings'>('bets')
+  const [activeTab, setActiveTab] = useState<'feed' | 'bets' | 'rankings'>('feed')
   const [sport, setSport] = useState('')
   const [league, setLeague] = useState('')
   const [event, setEvent] = useState('')
@@ -178,10 +179,10 @@ function App() {
       }
 
       setUserId(user.uid)
-      
+
       // Check if user has a profile
       const profile = await getUserProfile(user.uid)
-      
+
       if (!profile) {
         // User authenticated but no profile - needs username
         setNeedsUsername(true)
@@ -190,7 +191,7 @@ function App() {
         setUserProfile(profile)
         setNeedsUsername(false)
       }
-      
+
       setAuthLoading(false)
     })
     return () => unsub()
@@ -342,14 +343,14 @@ function App() {
       <header className="header">
         <div className="logo-section">
           <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 20L35 40L45 45L40 60L55 50L45 45L50 20Z" stroke="#10b981" strokeWidth="3" fill="none"/>
-            <path d="M30 50C30 50 35 45 40 50C45 55 50 60 50 60" stroke="#10b981" strokeWidth="3" fill="none"/>
-            <path d="M70 50C70 50 65 45 60 50C55 55 50 60 50 60" stroke="#10b981" strokeWidth="3" fill="none"/>
-            <path d="M45 70L50 75L55 70L50 85L45 70Z" fill="#10b981"/>
-            <rect x="42" y="75" width="4" height="5" fill="#10b981"/>
-            <rect x="46" y="75" width="4" height="5" fill="#10b981"/>
-            <rect x="50" y="75" width="4" height="5" fill="#10b981"/>
-            <rect x="54" y="75" width="4" height="5" fill="#10b981"/>
+            <path d="M50 20L35 40L45 45L40 60L55 50L45 45L50 20Z" stroke="#10b981" strokeWidth="3" fill="none" />
+            <path d="M30 50C30 50 35 45 40 50C45 55 50 60 50 60" stroke="#10b981" strokeWidth="3" fill="none" />
+            <path d="M70 50C70 50 65 45 60 50C55 55 50 60 50 60" stroke="#10b981" strokeWidth="3" fill="none" />
+            <path d="M45 70L50 75L55 70L50 85L45 70Z" fill="#10b981" />
+            <rect x="42" y="75" width="4" height="5" fill="#10b981" />
+            <rect x="46" y="75" width="4" height="5" fill="#10b981" />
+            <rect x="50" y="75" width="4" height="5" fill="#10b981" />
+            <rect x="54" y="75" width="4" height="5" fill="#10b981" />
           </svg>
           <div className="brand-text">
             <h1>BetTrack <span className="pro">Pro</span></h1>
@@ -366,6 +367,12 @@ function App() {
       </header>
 
       <nav className="tabs">
+        <button
+          className={`tab ${activeTab === 'feed' ? 'active' : ''}`}
+          onClick={() => setActiveTab('feed')}
+        >
+          Feed
+        </button>
         <button
           className={`tab ${activeTab === 'bets' ? 'active' : ''}`}
           onClick={() => setActiveTab('bets')}
@@ -386,6 +393,12 @@ function App() {
         }}>
           <Auth onAuthComplete={handleAuthComplete} />
         </div>
+      )}
+
+      {activeTab === 'feed' && (
+        <main className="grid">
+          <Feed />
+        </main>
       )}
 
       {activeTab === 'bets' ? (
